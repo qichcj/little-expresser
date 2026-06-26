@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="小小表达家">
+  <meta name="theme-color" content="#FFD43B">
+  <meta name="description" content="儿童辅助沟通工具 — 图片点击式表达">
+  <title>小小表达家</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
+</head>
+<body>
+
+  <!-- ==================== 主容器 ==================== -->
+  <div id="app-container">
+
+    <!-- 顶部导航栏 -->
+    <header id="top-bar">
+      <!-- 返回按钮 -->
+      <button id="btn-back" class="nav-btn" title="返回上一级" aria-label="返回上一级">
+        <span class="nav-btn-icon">⬅</span>
+        <span class="nav-btn-text">返回</span>
+      </button>
+
+      <!-- 面包屑导航 -->
+      <nav id="breadcrumb" class="breadcrumb" aria-label="面包屑导航"></nav>
+
+      <!-- 首页按钮 -->
+      <button id="btn-home" class="nav-btn" title="回首页" aria-label="回首页">
+        <span class="nav-btn-icon">🏠</span>
+        <span class="nav-btn-text">首页</span>
+      </button>
+    </header>
+
+    <!-- 主内容区 -->
+    <main id="content-area">
+      <!-- 动态渲染：首页分类 / 子菜单 / 叶子展示 -->
+    </main>
+
+    <!-- 叶子节点展示区（全屏覆盖） -->
+    <div id="leaf-display">
+      <!-- 动态渲染：最终结果的卡片 + 操作按钮 -->
+    </div>
+
+    <!-- 底部版权（最小化） -->
+    <footer id="app-footer">
+      <a href="admin.html" class="admin-link" title="家长管理">🔑</a>
+    </footer>
+
+  </div>
+
+  <!-- ==================== 脚本加载 ==================== -->
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/images.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/renderer.js"></script>
+
+  <script>
+    /**
+     * 应用初始化
+     */
+    (function init() {
+      // 初始化各模块
+      Voice.init();
+      Images.init();
+      Router.init();
+      Renderer.init();
+
+      // 初始渲染
+      const initialState = {
+        path: Router.getPath(),
+        depth: Router.getDepth(),
+        items: Router.getCurrentLevel(),
+        breadcrumb: Router.getBreadcrumb(),
+        isLeaf: Router.isLeafNode(),
+        currentNode: Router.getCurrentNode()
+      };
+      Renderer.render(initialState);
+
+      // 记录访问日志（可选）
+      console.log(`🌈 ${CONFIG.APP_NAME} v${CONFIG.APP_VERSION} 已就绪`);
+      console.log('💡 提示：语音播报在用户首次点击后激活（浏览器策略）');
+
+      // 注册 Service Worker (PWA)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('📦 Service Worker 已注册'))
+          .catch(err => console.log('Service Worker 注册失败:', err));
+      }
+    })();
+  </script>
+
+</body>
+</html>

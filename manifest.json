@@ -1,0 +1,25 @@
+{
+  "name": "小小表达家",
+  "short_name": "小小表达家",
+  "description": "儿童辅助沟通工具 — 图片点击式表达",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFF9E6",
+  "theme_color": "#FFD43B",
+  "orientation": "any",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23FFD43B' width='192' height='192' rx='32'/><text font-size='120' x='96' y='138' text-anchor='middle'>🌈</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23FFD43B' width='512' height='512' rx='64'/><text font-size='320' x='256' y='360' text-anchor='middle'>🌈</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

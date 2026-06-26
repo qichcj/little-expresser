@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家长管理 — 小小表达家</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ==================== 登录界面 ==================== -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-icon">🔐</div>
+      <h1 class="login-title">家长管理</h1>
+      <p class="login-subtitle">小小表达家 · 后台设置</p>
+      <form id="login-form" class="login-form">
+        <input
+          type="password"
+          id="password-input"
+          class="login-input"
+          placeholder="请输入管理密码"
+          autocomplete="off"
+          aria-label="管理密码"
+        >
+        <button type="submit" class="login-btn">进入管理</button>
+      </form>
+      <p class="login-hint">默认密码：123456</p>
+      <a href="index.html" class="login-back">← 返回沟通页面</a>
+    </div>
+  </div>
+
+  <!-- ==================== 管理界面 ==================== -->
+  <div id="admin-screen" class="admin-screen" style="display:none;">
+
+    <!-- 顶部栏 -->
+    <header class="admin-header">
+      <h1 class="admin-title">⚙️ 家长管理后台</h1>
+      <div class="admin-header-actions">
+        <button id="btn-export" class="tool-btn" title="导出配置">📤 导出</button>
+        <button id="btn-import" class="tool-btn" title="导入配置">📥 导入</button>
+        <button id="btn-reset" class="tool-btn tool-btn-danger" title="恢复默认">🔄 恢复默认</button>
+        <button id="btn-change-pwd" class="tool-btn" title="修改密码">🔑 改密码</button>
+        <button id="btn-logout" class="tool-btn" title="退出">🚪 退出</button>
+        <a href="index.html" class="tool-btn" title="返回沟通页面">🌈 沟通页面</a>
+      </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="admin-body">
+      <!-- 左侧分类列表 -->
+      <aside class="admin-sidebar">
+        <h2 class="sidebar-title">📂 分类列表</h2>
+        <div id="category-list" class="category-list">
+          <!-- 动态渲染 -->
+        </div>
+      </aside>
+
+      <!-- 右侧编辑区 -->
+      <main class="admin-main">
+        <div id="editor-empty" class="editor-empty">
+          <div class="editor-empty-icon">👈</div>
+          <p>从左侧选择一个分类开始编辑</p>
+        </div>
+
+        <div id="editor-panel" class="editor-panel" style="display:none;">
+          <!-- 面包屑 -->
+          <div class="editor-breadcrumb" id="editor-breadcrumb"></div>
+
+          <!-- 节点编辑表单 -->
+          <div class="editor-form" id="editor-form">
+            <h3>✏️ 编辑节点</h3>
+            <div class="form-group">
+              <label>名称</label>
+              <input type="text" id="edit-name" placeholder="节点名称">
+            </div>
+            <div class="form-group">
+              <label>Emoji 图标</label>
+              <input type="text" id="edit-emoji" placeholder="如：🧥">
+            </div>
+            <div class="form-group">
+              <label>Pexels 搜索关键词（英文）</label>
+              <input type="text" id="edit-imagequery" placeholder="如：child jacket coat">
+            </div>
+            <div class="form-group">
+              <label>自定义图片 URL（可选，优先级最高）</label>
+              <input type="url" id="edit-customimage" placeholder="https://...">
+            </div>
+            <div class="form-group">
+              <label>自定义播报文字（可选，默认使用名称）</label>
+              <input type="text" id="edit-customspeech" placeholder="如：我想要穿红色的棉袄">
+            </div>
+            <div class="form-actions">
+              <button id="btn-save" class="action-btn action-btn-primary">💾 保存</button>
+              <button id="btn-delete" class="action-btn action-btn-danger">🗑️ 删除此节点</button>
+            </div>
+          </div>
+
+          <!-- 子节点列表 -->
+          <div class="editor-children">
+            <h3>📋 子级选项</h3>
+            <div id="children-list" class="children-list">
+              <!-- 动态渲染 -->
+            </div>
+            <button id="btn-add-child" class="action-btn action-btn-add">➕ 添加子选项</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- 隐藏的文件导入 input -->
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+
+  <!-- ==================== 脚本加载 ==================== -->
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>
