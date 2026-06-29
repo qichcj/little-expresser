@@ -1,16 +1,19 @@
 /**
  * 小小表达家 — 图片获取与缓存模块
- * 使用 Pexels API 获取真实图片，localStorage 做缓存
+ * 多源图片策略：LoremFlickr（按关键词匹配真实图片，无需API Key）
+ *               → Picsum（高质量随机图回退）
+ *               → emoji 占位（最终回退）
  */
 
 const Images = {
   _cache: {},
   _pending: {},  // 防止重复请求
-  _apiKey: '',
+  _imgSize: 400, // 请求图片尺寸
 
   init() {
-    this._apiKey = CONFIG.PEXELS_API_KEY;
     this._cache = Storage.getImageCache();
+    // 根据屏幕大小调整请求图片尺寸
+    this._imgSize = Math.min(600, Math.max(300, Math.floor(window.innerWidth / 3)));
   },
 
   /**
@@ -22,7 +25,7 @@ const Images = {
   async getImage(node, forceRefresh = false) {
     const nodeId = node.id;
 
-    // 1. 检查是否有自定义图片
+    // 1. 检查是否有自定义图片（家长后台设置）
     if (node.customImage && !forceRefresh) {
       return node.customImage;
     }
@@ -41,9 +44,9 @@ const Images = {
       return this._pending[nodeId];
     }
 
-    // 4. 发起 API 请求
+    // 4. 多源依次尝试获取
     const query = node.imageQuery || node.name;
-    this._pending[nodeId] = this._fetchFromPexels(query)
+    this._pending[nodeId] = this._fetchImage(nodeId, query)
       .then(url => {
         if (url) {
           this._cache[nodeId] = { url, ts: Date.now() };
@@ -52,8 +55,7 @@ const Images = {
         delete this._pending[nodeId];
         return url;
       })
-      .catch(err => {
-        console.warn('Pexels API 请求失败:', err.message);
+      .catch(() => {
         delete this._pending[nodeId];
         return null;
       });
@@ -62,43 +64,67 @@ const Images = {
   },
 
   /**
-   * 从 Pexels API 获取图片
+   * 多源图片获取策略
    */
-  async _fetchFromPexels(query) {
-    // 如果没有 API Key，使用 fallback
-    if (!this._apiKey || this._apiKey === 'YOUR_PEXELS_API_KEY_HERE') {
-      return this._getFallbackImage(query);
-    }
+  async _fetchImage(nodeId, query) {
+    const size = this._imgSize;
 
+    // 来源1：LoremFlickr — 按关键词匹配 Flickr 真实图片，无需 API Key
     try {
-      const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1&orientation=square&size=medium&locale=zh-CN`;
-      const response = await fetch(url, {
-        headers: {
-          'Authorization': this._apiKey
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-      if (data.photos && data.photos.length > 0) {
-        return data.photos[0].src.medium; // medium: 350px, 适合卡片
-      }
-      return this._getFallbackImage(query);
+      const loremUrl = `https://loremflickr.com/${size}/${size}/${encodeURIComponent(query)}?lock=${this._hashCode(nodeId) % 100}`;
+      const ok = await this._checkImage(loremUrl);
+      if (ok) return loremUrl;
     } catch (e) {
-      console.warn('Pexels 请求异常:', e.message);
-      return this._getFallbackImage(query);
+      console.warn('LoremFlickr 不可用, 尝试下一源...');
     }
+
+    // 来源2：Picsum Photos — 高质量随机图（基于 id 保证一致性）
+    try {
+      const picsumUrl = `https://picsum.photos/seed/${encodeURIComponent(nodeId)}/${size}/${size}`;
+      const ok = await this._checkImage(picsumUrl);
+      if (ok) return picsumUrl;
+    } catch (e) {
+      console.warn('Picsum 不可用');
+    }
+
+    // 最终回退：emoji 占位
+    return null;
   },
 
   /**
-   * 回退方案：使用 SVG 占位图（彩色背景 + emoji）
+   * 快速检查图片 URL 是否可访问
    */
-  _getFallbackImage(query) {
-    // 返回 null 将触发 emoji 占位显示
-    return null;
+  async _checkImage(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      const timeout = setTimeout(() => {
+        img.src = '';
+        resolve(false);
+      }, 3000); // 3秒超时
+
+      img.onload = () => {
+        clearTimeout(timeout);
+        resolve(true);
+      };
+      img.onerror = () => {
+        clearTimeout(timeout);
+        resolve(false);
+      };
+      img.src = url;
+    });
+  },
+
+  /**
+   * 简单哈希函数，为 loremflickr 生成稳定的 lock 值
+   */
+  _hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const chr = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + chr;
+      hash |= 0;
+    }
+    return Math.abs(hash);
   },
 
   /**
@@ -113,12 +139,12 @@ const Images = {
   },
 
   /**
-   * 预加载某个分类下所有图片（可选）
+   * 预加载某个分类下所有图片
    */
   async preloadCategory(categoryNode) {
     const walk = (node) => {
       if (!node.children || node.children.length === 0) {
-        this.getImage(node); // fire and forget
+        this.getImage(node);
       } else {
         node.children.forEach(walk);
       }
