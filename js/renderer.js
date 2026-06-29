@@ -181,21 +181,27 @@ const Renderer = {
     imgContainer.appendChild(img);
 
     Images.getImage(node).then(url => {
-      if (url) {
-        const fallbackUrl = Images.getFallbackUrl(node);
-        img.src = url;
+      const fallbackUrl = Images.getFallbackUrl(node);
+
+      const tryLoad = (src, hasFallback) => {
+        img.src = src;
         img.onload = () => {
           img.style.display = 'block';
           emojiPlaceholder.style.display = 'none';
         };
         img.onerror = () => {
-          if (fallbackUrl && img.src !== fallbackUrl) {
-            img.src = fallbackUrl;
-            img.onerror = () => { emojiPlaceholder.style.display = 'flex'; };
+          if (hasFallback) {
+            tryLoad(fallbackUrl, false);
           } else {
             emojiPlaceholder.style.display = 'flex';
           }
         };
+      };
+
+      if (url) {
+        tryLoad(url, true);
+      } else if (fallbackUrl) {
+        tryLoad(fallbackUrl, false);
       }
     });
 
@@ -301,21 +307,27 @@ const Renderer = {
     }
 
     const url = await Images.getImage(item);
-    if (url) {
-      const fallbackUrl = Images.getFallbackUrl(item);
-      img.src = url;
+    const fallbackUrl = Images.getFallbackUrl(item);
+
+    const tryLoad = (src, hasFallback) => {
+      img.src = src;
       img.onload = () => {
         img.style.display = 'block';
         emoji.style.display = 'none';
       };
       img.onerror = () => {
-        if (fallbackUrl && img.src !== fallbackUrl) {
-          img.src = fallbackUrl;
-          img.onerror = () => { emoji.style.display = 'flex'; };
+        if (hasFallback) {
+          tryLoad(fallbackUrl, false);
         } else {
           emoji.style.display = 'flex';
         }
       };
+    };
+
+    if (url) {
+      tryLoad(url, true);
+    } else if (fallbackUrl) {
+      tryLoad(fallbackUrl, false);
     }
   },
 
