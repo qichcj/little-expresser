@@ -47,16 +47,21 @@ const Images = {
   },
 
   /**
-   * 构建多源图片 URL
-   * Picsum 提供高质量真实摄影图，通过 seed 保证同一节点始终返回相同图片
+   * 构建图片 URL
+   * LoremFlickr 按关键词匹配 Flickr 真实照片（无需 API Key）
    */
   _buildUrl(node) {
     const size = this._imgSize;
-    const query = node.imageQuery || node.name;
-    const seed = encodeURIComponent(node.id);
+    const query = encodeURIComponent(node.imageQuery || node.name);
+    return `https://loremflickr.com/${size}/${size}/${query}`;
+  },
 
-    // Picsum Photos — 高品质摄影图库，seed 保证一致性
-    // 使用多个 CDN 镜像地址，浏览器会自动选择最快的
+  /**
+   * 获取回退 URL（关键词不匹配时用）
+   */
+  getFallbackUrl(node) {
+    const size = this._imgSize;
+    const seed = encodeURIComponent(node.id);
     return `https://picsum.photos/seed/${seed}/${size}/${size}`;
   },
 

@@ -182,13 +182,19 @@ const Renderer = {
 
     Images.getImage(node).then(url => {
       if (url) {
+        const fallbackUrl = Images.getFallbackUrl(node);
         img.src = url;
         img.onload = () => {
           img.style.display = 'block';
           emojiPlaceholder.style.display = 'none';
         };
         img.onerror = () => {
-          emojiPlaceholder.style.display = 'flex';
+          if (fallbackUrl && img.src !== fallbackUrl) {
+            img.src = fallbackUrl;
+            img.onerror = () => { emojiPlaceholder.style.display = 'flex'; };
+          } else {
+            emojiPlaceholder.style.display = 'flex';
+          }
         };
       }
     });
@@ -296,13 +302,19 @@ const Renderer = {
 
     const url = await Images.getImage(item);
     if (url) {
+      const fallbackUrl = Images.getFallbackUrl(item);
       img.src = url;
       img.onload = () => {
         img.style.display = 'block';
         emoji.style.display = 'none';
       };
       img.onerror = () => {
-        emoji.style.display = 'flex';
+        if (fallbackUrl && img.src !== fallbackUrl) {
+          img.src = fallbackUrl;
+          img.onerror = () => { emoji.style.display = 'flex'; };
+        } else {
+          emoji.style.display = 'flex';
+        }
       };
     }
   },
