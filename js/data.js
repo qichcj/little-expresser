@@ -130,6 +130,24 @@ const DEFAULT_MENU_DATA = [
     color: "#FFA94D",
     children: [
       {
+        id: "food-breakfast",
+        name: "早餐",
+        emoji: "🌅",
+        imageQuery: "breakfast food child",
+        children: [
+          { id: "food-breakfast-milk", name: "牛奶", emoji: "🥛", imageQuery: "glass of milk breakfast", children: [] },
+          { id: "food-breakfast-egg", name: "鸡蛋", emoji: "🥚", imageQuery: "boiled egg breakfast", children: [] },
+          { id: "food-breakfast-bread", name: "面包", emoji: "🍞", imageQuery: "bread toast breakfast", children: [] },
+          { id: "food-breakfast-baozi", name: "包子", emoji: "🫓", imageQuery: "steamed baozi bun", children: [] },
+          { id: "food-breakfast-youtiao", name: "油条", emoji: "🥖", imageQuery: "youtiao chinese doughnut", children: [] },
+          { id: "food-breakfast-pancake", name: "煎饼", emoji: "🥞", imageQuery: "pancake breakfast", children: [] },
+          { id: "food-breakfast-cereal", name: "麦片", emoji: "🥣", imageQuery: "cereal breakfast bowl", children: [] },
+          { id: "food-breakfast-sandwich", name: "三明治", emoji: "🥪", imageQuery: "sandwich breakfast", children: [] },
+          { id: "food-breakfast-porridge", name: "粥", emoji: "🥣", imageQuery: "porridge congee breakfast", children: [] },
+          { id: "food-breakfast-soymilk", name: "豆浆", emoji: "☕", imageQuery: "soy milk breakfast", children: [] }
+        ]
+      },
+      {
         id: "food-staple",
         name: "主食",
         emoji: "🍚",
@@ -139,10 +157,30 @@ const DEFAULT_MENU_DATA = [
           { id: "food-staple-noodle", name: "面条", emoji: "🍜", imageQuery: "noodles soup", children: [] },
           { id: "food-staple-bun", name: "馒头", emoji: "🥟", imageQuery: "steamed bun mantou", children: [] },
           { id: "food-staple-dumpling", name: "饺子", emoji: "🥟", imageQuery: "dumplings jiaozi", children: [] },
-          { id: "food-staple-bread", name: "面包", emoji: "🍞", imageQuery: "bread toast fresh", children: [] },
-          { id: "food-staple-porridge", name: "粥", emoji: "🥣", imageQuery: "porridge congee", children: [] },
+          { id: "food-staple-friedrice", name: "炒饭", emoji: "🍛", imageQuery: "fried rice dish", children: [] },
+          { id: "food-staple-tangyuan", name: "汤圆", emoji: "⚪", imageQuery: "tangyuan glutinous rice balls", children: [] },
+          { id: "food-staple-zongzi", name: "粽子", emoji: "🔺", imageQuery: "zongzi sticky rice dumpling", children: [] },
+          { id: "food-staple-huajuan", name: "花卷", emoji: "🌸", imageQuery: "steamed huajuan roll", children: [] },
           { id: "food-staple-corn", name: "玉米", emoji: "🌽", imageQuery: "corn cooked", children: [] },
           { id: "food-staple-potato", name: "红薯", emoji: "🍠", imageQuery: "sweet potato cooked", children: [] }
+        ]
+      },
+      {
+        id: "food-bakery",
+        name: "面点烘焙",
+        emoji: "🥐",
+        imageQuery: "bakery pastry bread",
+        children: [
+          { id: "food-bakery-cake", name: "蛋糕", emoji: "🎂", imageQuery: "cake slice dessert", children: [] },
+          { id: "food-bakery-cookie", name: "曲奇饼干", emoji: "🍪", imageQuery: "cookies baked", children: [] },
+          { id: "food-bakery-eggtart", name: "蛋挞", emoji: "🥧", imageQuery: "egg tart pastry", children: [] },
+          { id: "food-bakery-croissant", name: "牛角包", emoji: "🥐", imageQuery: "croissant pastry", children: [] },
+          { id: "food-bakery-pizza", name: "披萨", emoji: "🍕", imageQuery: "pizza slice", children: [] },
+          { id: "food-bakery-burger", name: "汉堡", emoji: "🍔", imageQuery: "hamburger burger", children: [] },
+          { id: "food-bakery-hotdog", name: "热狗", emoji: "🌭", imageQuery: "hot dog sausage", children: [] },
+          { id: "food-bakery-toast", name: "吐司", emoji: "🍞", imageQuery: "toast bread slice", children: [] },
+          { id: "food-bakery-waffle", name: "华夫饼", emoji: "🧇", imageQuery: "waffle breakfast", children: [] },
+          { id: "food-bakery-muffin", name: "马芬蛋糕", emoji: "🧁", imageQuery: "muffin cupcake", children: [] }
         ]
       },
       {
@@ -156,24 +194,37 @@ const DEFAULT_MENU_DATA = [
             { id: "food-dish-meat-pork", name: "猪肉", emoji: "🥩", imageQuery: "cooked pork dish", children: [] },
             { id: "food-dish-meat-beef", name: "牛肉", emoji: "🥩", imageQuery: "cooked beef dish", children: [] },
             { id: "food-dish-meat-fish", name: "鱼", emoji: "🐟", imageQuery: "cooked fish dish", children: [] },
-            { id: "food-dish-meat-shrimp", name: "虾", emoji: "🦐", imageQuery: "cooked shrimp", children: [] }
+            { id: "food-dish-meat-shrimp", name: "虾", emoji: "🦐", imageQuery: "cooked shrimp", children: [] },
+            { id: "food-dish-meat-sausage", name: "香肠", emoji: "🌭", imageQuery: "sausage cooked", children: [] },
+            { id: "food-dish-meat-meatball", name: "肉丸", emoji: "🧆", imageQuery: "meatballs cooked", children: [] }
           ]},
           { id: "food-dish-veggie", name: "蔬菜", emoji: "🥬", imageQuery: "cooked vegetables dish", children: [
             { id: "food-dish-veggie-green", name: "青菜", emoji: "🥬", imageQuery: "bok choy greens cooked", children: [] },
             { id: "food-dish-veggie-carrot", name: "胡萝卜", emoji: "🥕", imageQuery: "cooked carrots", children: [] },
             { id: "food-dish-veggie-broccoli", name: "西兰花", emoji: "🥦", imageQuery: "broccoli cooked", children: [] },
             { id: "food-dish-veggie-tomato", name: "西红柿", emoji: "🍅", imageQuery: "cooked tomato dish", children: [] },
-            { id: "food-dish-veggie-spinach", name: "菠菜", emoji: "🥬", imageQuery: "cooked spinach", children: [] }
+            { id: "food-dish-veggie-spinach", name: "菠菜", emoji: "🥬", imageQuery: "cooked spinach", children: [] },
+            { id: "food-dish-veggie-cucumber", name: "黄瓜", emoji: "🥒", imageQuery: "cucumber fresh", children: [] },
+            { id: "food-dish-veggie-potatowedges", name: "土豆", emoji: "🥔", imageQuery: "cooked potato dish", children: [] },
+            { id: "food-dish-veggie-mushroom", name: "蘑菇", emoji: "🍄", imageQuery: "cooked mushroom", children: [] }
           ]},
           { id: "food-dish-egg", name: "蛋类", emoji: "🥚", imageQuery: "egg dish cooked", children: [
             { id: "food-dish-egg-boiled", name: "煮鸡蛋", emoji: "🥚", imageQuery: "boiled egg", children: [] },
             { id: "food-dish-egg-fried", name: "炒鸡蛋", emoji: "🍳", imageQuery: "scrambled eggs", children: [] },
-            { id: "food-dish-egg-steamed", name: "蒸蛋羹", emoji: "🥣", imageQuery: "steamed egg custard", children: [] }
+            { id: "food-dish-egg-steamed", name: "蒸蛋羹", emoji: "🥣", imageQuery: "steamed egg custard", children: [] },
+            { id: "food-dish-egg-friedrice", name: "蛋炒饭", emoji: "🍳", imageQuery: "egg fried rice", children: [] }
           ]},
-          { id: "food-dish-soup", name: "汤", emoji: "🍲", imageQuery: "soup dish chinese", children: [
+          { id: "food-dish-soup", name: "汤羹", emoji: "🍲", imageQuery: "soup dish chinese", children: [
             { id: "food-dish-soup-egg", name: "蛋花汤", emoji: "🥚", imageQuery: "egg drop soup", children: [] },
             { id: "food-dish-soup-veggie", name: "蔬菜汤", emoji: "🥬", imageQuery: "vegetable soup", children: [] },
-            { id: "food-dish-soup-meat", name: "肉汤", emoji: "🍖", imageQuery: "meat soup broth", children: [] }
+            { id: "food-dish-soup-meat", name: "排骨汤", emoji: "🍖", imageQuery: "rib soup broth", children: [] },
+            { id: "food-dish-soup-chicken", name: "鸡汤", emoji: "🍗", imageQuery: "chicken soup", children: [] },
+            { id: "food-dish-soup-tomatoegg", name: "番茄蛋汤", emoji: "🍅", imageQuery: "tomato egg soup", children: [] }
+          ]},
+          { id: "food-dish-tofu", name: "豆腐类", emoji: "🧈", imageQuery: "tofu dish chinese", children: [
+            { id: "food-dish-tofu-soft", name: "嫩豆腐", emoji: "🧈", imageQuery: "soft tofu silken", children: [] },
+            { id: "food-dish-tofu-fried", name: "家常豆腐", emoji: "🍳", imageQuery: "fried tofu dish", children: [] },
+            { id: "food-dish-tofu-maopo", name: "麻婆豆腐", emoji: "🌶️", imageQuery: "mapo tofu spicy", children: [] }
           ]}
         ]
       },
@@ -190,7 +241,13 @@ const DEFAULT_MENU_DATA = [
           { id: "food-fruit-strawberry", name: "草莓", emoji: "🍓", imageQuery: "strawberry fruit fresh", children: [] },
           { id: "food-fruit-watermelon", name: "西瓜", emoji: "🍉", imageQuery: "watermelon fruit fresh", children: [] },
           { id: "food-fruit-pear", name: "梨", emoji: "🍐", imageQuery: "pear fruit fresh", children: [] },
-          { id: "food-fruit-peach", name: "桃子", emoji: "🍑", imageQuery: "peach fruit fresh", children: [] }
+          { id: "food-fruit-peach", name: "桃子", emoji: "🍑", imageQuery: "peach fruit fresh", children: [] },
+          { id: "food-fruit-mango", name: "芒果", emoji: "🥭", imageQuery: "mango fruit fresh", children: [] },
+          { id: "food-fruit-kiwi", name: "猕猴桃", emoji: "🥝", imageQuery: "kiwi fruit fresh", children: [] },
+          { id: "food-fruit-cherry", name: "樱桃", emoji: "🍒", imageQuery: "cherry fruit fresh", children: [] },
+          { id: "food-fruit-blueberry", name: "蓝莓", emoji: "🫐", imageQuery: "blueberry fruit fresh", children: [] },
+          { id: "food-fruit-pineapple", name: "菠萝", emoji: "🍍", imageQuery: "pineapple fruit fresh", children: [] },
+          { id: "food-fruit-dragonfruit", name: "火龙果", emoji: "🐉", imageQuery: "dragon fruit fresh", children: [] }
         ]
       },
       {
@@ -204,22 +261,30 @@ const DEFAULT_MENU_DATA = [
           { id: "food-drink-juice", name: "果汁", emoji: "🧃", imageQuery: "fruit juice glass", children: [] },
           { id: "food-drink-yogurt", name: "酸奶", emoji: "🥛", imageQuery: "yogurt cup", children: [] },
           { id: "food-drink-soymilk", name: "豆浆", emoji: "☕", imageQuery: "soy milk drink", children: [] },
-          { id: "food-drink-soup", name: "汤", emoji: "🍲", imageQuery: "bowl of soup", children: [] }
+          { id: "food-drink-hotchoc", name: "热巧克力", emoji: "🍫", imageQuery: "hot chocolate drink", children: [] },
+          { id: "food-drink-smoothie", name: "奶昔", emoji: "🥤", imageQuery: "smoothie drink fruit", children: [] },
+          { id: "food-drink-tea", name: "茶", emoji: "🍵", imageQuery: "cup of tea", children: [] },
+          { id: "food-drink-soda", name: "汽水", emoji: "🥤", imageQuery: "soda drink fizzy", children: [] }
         ]
       },
       {
         id: "food-snack",
-        name: "零食",
-        emoji: "🍪",
-        imageQuery: "snacks food",
+        name: "零食小吃",
+        emoji: "🍿",
+        imageQuery: "snacks food treats",
         children: [
           { id: "food-snack-biscuit", name: "饼干", emoji: "🍪", imageQuery: "biscuits cookies", children: [] },
           { id: "food-snack-candy", name: "糖果", emoji: "🍬", imageQuery: "candy sweets", children: [] },
-          { id: "food-snack-cake", name: "蛋糕", emoji: "🍰", imageQuery: "cake slice", children: [] },
           { id: "food-snack-icecream", name: "冰淇淋", emoji: "🍦", imageQuery: "ice cream cone", children: [] },
           { id: "food-snack-chips", name: "薯片", emoji: "🥔", imageQuery: "potato chips", children: [] },
           { id: "food-snack-nut", name: "坚果", emoji: "🥜", imageQuery: "nuts snack", children: [] },
-          { id: "food-snack-jelly", name: "果冻", emoji: "🍮", imageQuery: "jelly dessert", children: [] }
+          { id: "food-snack-jelly", name: "果冻", emoji: "🍮", imageQuery: "jelly dessert", children: [] },
+          { id: "food-snack-popcorn", name: "爆米花", emoji: "🍿", imageQuery: "popcorn snack", children: [] },
+          { id: "food-snack-chocolate", name: "巧克力", emoji: "🍫", imageQuery: "chocolate bar", children: [] },
+          { id: "food-snack-pudding", name: "布丁", emoji: "🍮", imageQuery: "pudding dessert", children: [] },
+          { id: "food-snack-marshmallow", name: "棉花糖", emoji: "☁️", imageQuery: "marshmallow candy", children: [] },
+          { id: "food-snack-raisin", name: "葡萄干", emoji: "🍇", imageQuery: "raisins dried fruit", children: [] },
+          { id: "food-snack-seaweed", name: "海苔", emoji: "🌿", imageQuery: "seaweed snack nori", children: [] }
         ]
       }
     ]
@@ -378,7 +443,13 @@ const DEFAULT_MENU_DATA = [
           { id: "entertainment-toys-clay", name: "橡皮泥", emoji: "🎨", imageQuery: "play dough clay child", children: [] },
           { id: "entertainment-toys-ball", name: "球", emoji: "⚽", imageQuery: "ball toy child", children: [] },
           { id: "entertainment-toys-robot", name: "机器人", emoji: "🤖", imageQuery: "robot toy child", children: [] },
-          { id: "entertainment-toys-dino", name: "恐龙", emoji: "🦕", imageQuery: "dinosaur toy child", children: [] }
+          { id: "entertainment-toys-dino", name: "恐龙", emoji: "🦕", imageQuery: "dinosaur toy child", children: [] },
+          { id: "entertainment-toys-train", name: "小火车", emoji: "🚂", imageQuery: "toy train child", children: [] },
+          { id: "entertainment-toys-stuffed", name: "毛绒玩具", emoji: "🧸", imageQuery: "stuffed animal plush toy", children: [] },
+          { id: "entertainment-toys-bubble", name: "泡泡机", emoji: "🫧", imageQuery: "bubble machine toy", children: [] },
+          { id: "entertainment-toys-top", name: "陀螺", emoji: "🔴", imageQuery: "spinning top toy", children: [] },
+          { id: "entertainment-toys-balloon", name: "气球", emoji: "🎈", imageQuery: "balloon toy child", children: [] },
+          { id: "entertainment-toys-kite", name: "风筝", emoji: "🪁", imageQuery: "kite flying toy", children: [] }
         ]
       },
       {
@@ -393,7 +464,60 @@ const DEFAULT_MENU_DATA = [
           { id: "entertainment-games-dance", name: "跳舞", emoji: "💃", imageQuery: "child dancing", children: [] },
           { id: "entertainment-games-slide", name: "滑滑梯", emoji: "🛝", imageQuery: "playground slide child", children: [] },
           { id: "entertainment-games-swing", name: "荡秋千", emoji: "🎠", imageQuery: "playground swing child", children: [] },
-          { id: "entertainment-games-jump", name: "蹦蹦跳", emoji: "🤸", imageQuery: "child jumping playing", children: [] }
+          { id: "entertainment-games-jump", name: "蹦蹦跳", emoji: "🤸", imageQuery: "child jumping playing", children: [] },
+          { id: "entertainment-games-seesaw", name: "跷跷板", emoji: "⚖️", imageQuery: "seesaw playground child", children: [] },
+          { id: "entertainment-games-climb", name: "攀爬架", emoji: "🧗", imageQuery: "child climbing playground", children: [] },
+          { id: "entertainment-games-trampoline", name: "蹦床", emoji: "🦘", imageQuery: "trampoline child jumping", children: [] },
+          { id: "entertainment-games-tag", name: "追逐跑", emoji: "🏃", imageQuery: "children running playing tag", children: [] }
+        ]
+      },
+      {
+        id: "entertainment-sports",
+        name: "运动",
+        emoji: "⚽",
+        imageQuery: "children sports activities",
+        children: [
+          { id: "entertainment-sports-run", name: "跑步", emoji: "🏃", imageQuery: "child running", children: [] },
+          { id: "entertainment-sports-soccer", name: "踢足球", emoji: "⚽", imageQuery: "child playing soccer football", children: [] },
+          { id: "entertainment-sports-basketball", name: "打篮球", emoji: "🏀", imageQuery: "child playing basketball", children: [] },
+          { id: "entertainment-sports-jumprope", name: "跳绳", emoji: "🪢", imageQuery: "child jump rope skipping", children: [] },
+          { id: "entertainment-sports-pingpong", name: "乒乓球", emoji: "🏓", imageQuery: "child table tennis ping pong", children: [] },
+          { id: "entertainment-sports-badminton", name: "羽毛球", emoji: "🏸", imageQuery: "child badminton", children: [] },
+          { id: "entertainment-sports-gymnastics", name: "体操", emoji: "🤸", imageQuery: "child gymnastics", children: [] },
+          { id: "entertainment-sports-hula", name: "呼啦圈", emoji: "⭕", imageQuery: "hula hoop child", children: [] },
+          { id: "entertainment-sports-skate", name: "轮滑", emoji: "🛼", imageQuery: "child roller skating", children: [] }
+        ]
+      },
+      {
+        id: "entertainment-crafts",
+        name: "手工制作",
+        emoji: "✂️",
+        imageQuery: "children arts crafts",
+        children: [
+          { id: "entertainment-crafts-papercut", name: "剪纸", emoji: "✂️", imageQuery: "paper cutting craft child", children: [] },
+          { id: "entertainment-crafts-origami", name: "折纸", emoji: "📄", imageQuery: "origami paper folding child", children: [] },
+          { id: "entertainment-crafts-beads", name: "串珠", emoji: "📿", imageQuery: "bead stringing craft child", children: [] },
+          { id: "entertainment-crafts-coloring", name: "涂颜色", emoji: "🖍️", imageQuery: "child coloring drawing", children: [] },
+          { id: "entertainment-crafts-paint", name: "水彩画", emoji: "🎨", imageQuery: "child watercolor painting", children: [] },
+          { id: "entertainment-crafts-sticker", name: "贴贴纸", emoji: "⭐", imageQuery: "child sticker craft", children: [] },
+          { id: "entertainment-crafts-lego", name: "拼乐高", emoji: "🧱", imageQuery: "lego building child", children: [] },
+          { id: "entertainment-crafts-sew", name: "缝纫手工", emoji: "🪡", imageQuery: "child sewing craft", children: [] }
+        ]
+      },
+      {
+        id: "entertainment-pretend",
+        name: "角色扮演",
+        emoji: "🎭",
+        imageQuery: "children pretend play role",
+        children: [
+          { id: "entertainment-pretend-house", name: "过家家", emoji: "🏠", imageQuery: "child playing house pretend", children: [] },
+          { id: "entertainment-pretend-doctor", name: "医生游戏", emoji: "🩺", imageQuery: "child playing doctor pretend", children: [] },
+          { id: "entertainment-pretend-cook", name: "小厨师", emoji: "👨‍🍳", imageQuery: "child playing cooking pretend", children: [] },
+          { id: "entertainment-pretend-superhero", name: "超人游戏", emoji: "🦸", imageQuery: "child superhero costume pretend", children: [] },
+          { id: "entertainment-pretend-teacher", name: "当老师", emoji: "👩‍🏫", imageQuery: "child playing teacher pretend", children: [] },
+          { id: "entertainment-pretend-shop", name: "开商店", emoji: "🏪", imageQuery: "child playing shopkeeper", children: [] },
+          { id: "entertainment-pretend-fireman", name: "消防员", emoji: "👨‍🚒", imageQuery: "child firefighter costume pretend", children: [] },
+          { id: "entertainment-pretend-princess", name: "公主王子", emoji: "👸", imageQuery: "child princess costume dress up", children: [] }
         ]
       },
       {
@@ -402,35 +526,62 @@ const DEFAULT_MENU_DATA = [
         emoji: "📱",
         imageQuery: "child tablet cartoon",
         children: [
-          { id: "entertainment-digital-cartoon", name: "看动画", emoji: "📺", imageQuery: "child watching cartoon", children: [] },
-          { id: "entertainment-digital-tablet", name: "平板电脑", emoji: "📱", imageQuery: "child tablet device", children: [] },
-          { id: "entertainment-digital-music", name: "听音乐", emoji: "🎵", imageQuery: "child listening music", children: [] },
-          { id: "entertainment-digital-story", name: "听故事", emoji: "📖", imageQuery: "child listening story audiobook", children: [] }
+          { id: "entertainment-digital-cartoon", name: "看动画片", emoji: "📺", imageQuery: "child watching cartoon tv", children: [] },
+          { id: "entertainment-digital-tablet", name: "玩平板", emoji: "📱", imageQuery: "child tablet device playing", children: [] },
+          { id: "entertainment-digital-music", name: "听音乐", emoji: "🎵", imageQuery: "child listening music headphones", children: [] },
+          { id: "entertainment-digital-story", name: "听故事", emoji: "📖", imageQuery: "child listening story audiobook", children: [] },
+          { id: "entertainment-digital-movie", name: "看电影", emoji: "🎬", imageQuery: "child watching movie family", children: [] },
+          { id: "entertainment-digital-karaoke", name: "唱卡拉OK", emoji: "🎤", imageQuery: "child karaoke singing microphone", children: [] },
+          { id: "entertainment-digital-game", name: "玩电子游戏", emoji: "🎮", imageQuery: "child playing video game", children: [] }
         ]
       },
       {
         id: "entertainment-outdoor",
         name: "户外活动",
         emoji: "🌳",
-        imageQuery: "children outdoor playground",
+        imageQuery: "children outdoor activities",
         children: [
-          { id: "entertainment-outdoor-playground", name: "游乐场", emoji: "🎡", imageQuery: "playground outdoor children", children: [] },
-          { id: "entertainment-outdoor-zoo", name: "动物园", emoji: "🦁", imageQuery: "zoo animals children", children: [] },
+          { id: "entertainment-outdoor-playground", name: "去游乐场", emoji: "🎡", imageQuery: "playground outdoor children", children: [] },
+          { id: "entertainment-outdoor-zoo", name: "去动物园", emoji: "🦁", imageQuery: "zoo animals children", children: [] },
           { id: "entertainment-outdoor-swim", name: "游泳", emoji: "🏊", imageQuery: "child swimming pool", children: [] },
-          { id: "entertainment-outdoor-bike", name: "骑车", emoji: "🚲", imageQuery: "child riding bicycle", children: [] },
+          { id: "entertainment-outdoor-bike", name: "骑自行车", emoji: "🚲", imageQuery: "child riding bicycle outdoor", children: [] },
           { id: "entertainment-outdoor-sand", name: "玩沙子", emoji: "🏖️", imageQuery: "child playing sand beach", children: [] },
-          { id: "entertainment-outdoor-bubbles", name: "吹泡泡", emoji: "🫧", imageQuery: "child blowing bubbles", children: [] }
+          { id: "entertainment-outdoor-bubbles", name: "吹泡泡", emoji: "🫧", imageQuery: "child blowing bubbles outdoor", children: [] },
+          { id: "entertainment-outdoor-picnic", name: "野餐", emoji: "🧺", imageQuery: "family picnic outdoor", children: [] },
+          { id: "entertainment-outdoor-camp", name: "露营", emoji: "⛺", imageQuery: "child camping outdoor tent", children: [] },
+          { id: "entertainment-outdoor-fishing", name: "钓鱼", emoji: "🎣", imageQuery: "child fishing outdoor", children: [] },
+          { id: "entertainment-outdoor-garden", name: "种花种草", emoji: "🌻", imageQuery: "child gardening planting flowers", children: [] }
+        ]
+      },
+      {
+        id: "entertainment-pets",
+        name: "宠物与动物",
+        emoji: "🐶",
+        imageQuery: "cute pets animals children",
+        children: [
+          { id: "entertainment-pets-dog", name: "狗狗", emoji: "🐕", imageQuery: "cute dog pet", children: [] },
+          { id: "entertainment-pets-cat", name: "猫咪", emoji: "🐈", imageQuery: "cute cat pet", children: [] },
+          { id: "entertainment-pets-fish", name: "金鱼", emoji: "🐠", imageQuery: "goldfish pet aquarium", children: [] },
+          { id: "entertainment-pets-rabbit", name: "兔子", emoji: "🐰", imageQuery: "rabbit pet cute", children: [] },
+          { id: "entertainment-pets-hamster", name: "仓鼠", emoji: "🐹", imageQuery: "hamster pet cute", children: [] },
+          { id: "entertainment-pets-bird", name: "小鸟", emoji: "🐦", imageQuery: "pet bird cute", children: [] },
+          { id: "entertainment-pets-turtle", name: "乌龟", emoji: "🐢", imageQuery: "turtle pet", children: [] },
+          { id: "entertainment-pets-chick", name: "小鸡", emoji: "🐤", imageQuery: "baby chick cute", children: [] }
         ]
       },
       {
         id: "entertainment-books",
-        name: "看书",
+        name: "看书学习",
         emoji: "📚",
-        imageQuery: "children books reading",
+        imageQuery: "children books reading learning",
         children: [
-          { id: "entertainment-books-picture", name: "绘本", emoji: "📖", imageQuery: "children picture book", children: [] },
-          { id: "entertainment-books-sticker", name: "贴纸书", emoji: "⭐", imageQuery: "sticker book child", children: [] },
-          { id: "entertainment-books-coloring", name: "涂色书", emoji: "🖍️", imageQuery: "coloring book child", children: [] }
+          { id: "entertainment-books-picture", name: "绘本", emoji: "📖", imageQuery: "children picture story book", children: [] },
+          { id: "entertainment-books-stickerbook", name: "贴纸书", emoji: "⭐", imageQuery: "sticker activity book child", children: [] },
+          { id: "entertainment-books-coloringbook", name: "涂色书", emoji: "🖍️", imageQuery: "coloring book child", children: [] },
+          { id: "entertainment-books-fairytale", name: "童话书", emoji: "🏰", imageQuery: "fairytale book child", children: [] },
+          { id: "entertainment-books-science", name: "科普书", emoji: "🔬", imageQuery: "children science book", children: [] },
+          { id: "entertainment-books-maze", name: "迷宫书", emoji: "🔍", imageQuery: "maze puzzle book child", children: [] },
+          { id: "entertainment-books-flashcard", name: "认字卡", emoji: "🃏", imageQuery: "flashcards learning child", children: [] }
         ]
       }
     ]
