@@ -5,7 +5,7 @@
 const CONFIG = {
   // Pexels API Key — 在 https://www.pexels.com/api/ 免费注册获取
   // 免费额度：200 次请求/小时
-  PEXELS_API_KEY: 'FYJezoifG29spMPivB3oBCmkJbe0LhmlfboFknqmS2ctvsaB3PrAf1hd',
+  PEXELS_API_KEY: '',  // 填入 Pexels API Key 即可启用真实图片搜索
 
   // 每页显示图片数量（Pexels API）
   PEXELS_PER_PAGE: 1,

@@ -180,30 +180,17 @@ const Renderer = {
     img.style.display = 'none';
     imgContainer.appendChild(img);
 
-    Images.getImage(node).then(url => {
-      const fallbackUrl = Images.getFallbackUrl(node);
-
-      const tryLoad = (src, hasFallback) => {
-        img.src = src;
-        img.onload = () => {
-          img.style.display = 'block';
-          emojiPlaceholder.style.display = 'none';
-        };
-        img.onerror = () => {
-          if (hasFallback) {
-            tryLoad(fallbackUrl, false);
-          } else {
-            emojiPlaceholder.style.display = 'flex';
-          }
-        };
+    const url = Images.getImage(node);
+    if (url) {
+      img.src = url;
+      img.onload = () => {
+        img.style.display = 'block';
+        emojiPlaceholder.style.display = 'none';
       };
-
-      if (url) {
-        tryLoad(url, true);
-      } else if (fallbackUrl) {
-        tryLoad(fallbackUrl, false);
-      }
-    });
+      img.onerror = () => {
+        emojiPlaceholder.style.display = 'flex';
+      };
+    }
 
     leafCard.appendChild(imgContainer);
 
@@ -287,15 +274,14 @@ const Renderer = {
     return card;
   },
 
-  // 异步加载卡片图片
-  async _loadCardImage(card, item) {
-    const imgWrap = card.querySelector('.card-img-wrap');
+  // 加载卡片图片（卡通 SVG，瞬间显示）
+  _loadCardImage(card, item) {
     const emoji = card.querySelector('.card-emoji');
     const img = card.querySelector('.card-img');
 
-    // 如果有自定义图片，直接使用
-    if (item.customImage) {
-      img.src = item.customImage;
+    const url = Images.getImage(item);
+    if (url) {
+      img.src = url;
       img.onload = () => {
         img.style.display = 'block';
         emoji.style.display = 'none';
@@ -303,31 +289,6 @@ const Renderer = {
       img.onerror = () => {
         emoji.style.display = 'flex';
       };
-      return;
-    }
-
-    const url = await Images.getImage(item);
-    const fallbackUrl = Images.getFallbackUrl(item);
-
-    const tryLoad = (src, hasFallback) => {
-      img.src = src;
-      img.onload = () => {
-        img.style.display = 'block';
-        emoji.style.display = 'none';
-      };
-      img.onerror = () => {
-        if (hasFallback) {
-          tryLoad(fallbackUrl, false);
-        } else {
-          emoji.style.display = 'flex';
-        }
-      };
-    };
-
-    if (url) {
-      tryLoad(url, true);
-    } else if (fallbackUrl) {
-      tryLoad(fallbackUrl, false);
     }
   },
 

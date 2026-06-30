@@ -1,93 +1,49 @@
 /**
- * 小小表达家 — 图片获取与缓存模块
- * 主源：Pexels API 关键词搜索 → 100%匹配真实图片
- * 回退：Picsum 随机摄影图 → emoji 占位
+ * 小小表达家 — 卡通图片模块
+ * 生成精美的彩色 SVG 占位图，零网络依赖，瞬间加载
  */
 
 const Images = {
-  _cache: {},
-  _pending: {},
   _imgSize: 400,
 
   init() {
-    this._cache = Storage.getImageCache();
     this._imgSize = Math.min(600, Math.max(300, Math.floor(window.innerWidth / 3)));
   },
 
   /**
-   * 获取节点图片 URL
+   * 生成节点对应的卡通图片 Data URI
    */
-  async getImage(node, forceRefresh = false) {
-    const nodeId = node.id;
-
-    // 1. 自定义图片优先
-    if (node.customImage && !forceRefresh) return node.customImage;
-
-    // 2. 缓存命中
-    if (!forceRefresh && this._cache[nodeId]) {
-      const cached = this._cache[nodeId];
-      if (Date.now() - cached.ts < CONFIG.IMAGE_CACHE_TTL) {
-        return cached.url;
-      }
-    }
-
-    // 3. 防止重复请求
-    if (this._pending[nodeId]) return this._pending[nodeId];
-
-    // 4. 发起请求（带超时保护）
-    const query = node.imageQuery || node.name;
-    this._pending[nodeId] = Promise.race([
-      this._fetchFromPexels(query),
-      new Promise(r => setTimeout(() => r(null), 5000)) // 5秒超时
-    ])
-      .then(url => {
-        if (url) {
-          this._cache[nodeId] = { url, ts: Date.now() };
-          Storage.saveImageCache(this._cache);
-        }
-        delete this._pending[nodeId];
-        return url;
-      })
-      .catch(() => {
-        delete this._pending[nodeId];
-        return null;
-      });
-
-    return this._pending[nodeId];
+  getImage(node) {
+    // 自定义图片优先
+    if (node.customImage) return node.customImage;
+    return this.generateSVG(node.emoji || '📷', node.color);
   },
 
   /**
-   * Pexels API — 关键词搜索真实图片
+   * 生成精美的卡通风格 SVG 图片
    */
-  async _fetchFromPexels(query) {
-    const apiKey = CONFIG.PEXELS_API_KEY;
-    if (!apiKey || apiKey === 'YOUR_PEXELS_API_KEY_HERE') return null;
-
-    try {
-      const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1&orientation=square&size=medium&locale=zh-CN`;
-      const resp = await fetch(url, { headers: { 'Authorization': apiKey } });
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const data = await resp.json();
-      if (data.photos && data.photos.length > 0) {
-        return data.photos[0].src.medium;
-      }
-    } catch (e) {
-      console.warn('Pexels API 失败:', e.message);
-    }
-    return null;
+  generateSVG(emoji, colorHex) {
+    const hue = this._colorToHue(colorHex);
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:hsl(${hue},70%,88%)"/>
+          <stop offset="100%" style="stop-color:hsl(${hue},60%,72%)"/>
+        </linearGradient>
+      </defs>
+      <rect fill="url(#g)" width="200" height="200" rx="24"/>
+      <circle cx="100" cy="80" r="44" fill="white" opacity="0.45"/>
+      <circle cx="80" cy="65" r="8" fill="white" opacity="0.5"/>
+      <text font-size="70" x="100" y="108" text-anchor="middle" dominant-baseline="middle">${emoji}</text>
+    </svg>`;
+    return 'data:image/svg+xml,' + encodeURIComponent(svg);
   },
 
-  /**
-   * 回退 URL（Pexels 失败时用）
-   */
-  getFallbackUrl(node) {
-    const size = this._imgSize;
-    const seed = encodeURIComponent(node.id);
-    return `https://picsum.photos/seed/${seed}/${size}/${size}`;
-  },
-
-  clearCache() {
-    this._cache = {};
-    Storage.saveImageCache({});
+  _colorToHue(colorHex) {
+    const hues = {
+      '#FF6B6B': 0, '#FFA94D': 28, '#FFD43B': 48,
+      '#69DB7C': 135, '#4DABF7': 205, '#DA77F2': 280, '#F783AC': 345
+    };
+    return hues[colorHex] || 200;
   }
 };
